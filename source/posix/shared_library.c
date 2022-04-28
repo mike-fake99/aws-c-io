@@ -15,7 +15,7 @@ static const char *s_unknown_error = "<Unknown>";
 int aws_shared_library_init(struct aws_shared_library *library, const char *library_path) {
     AWS_ZERO_STRUCT(*library);
 
-    library->library_handle = dlopen(library_path, RTLD_LAZY);
+    library->library_handle = dlopen(library_path, RTLD_LAZY | RTLD_DEEPBIND);
     if (library->library_handle == NULL) {
         const char *error = dlerror();
         AWS_LOGF_ERROR(
